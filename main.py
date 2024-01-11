@@ -1,43 +1,56 @@
-import random
-import hangman_art
-import hangman_words
+from replit import clear
+import art
+print(art.logo)
+repeat = True
+def add(a,b):
+  return a + b
+def subtract(c, d):
+  return c-d
+def multiply(e, f):
+  return e * f
+def divide(h, i):
+  return h/i
 
-word_list = hangman_words.word_list
-chosen_word = random.choice(word_list)
-word_length = len(chosen_word)
-
-end_of_game = False
-lives = 6
-
-print(hangman_art.logo)
-display = []
-for _ in range(word_length):
-    display += "_"
-
-while not end_of_game:
-    guess = input("Guess a letter: ").lower()
-    if guess in display:
-      print(f"Sorry, you've already guessed {guess}.")
-      print("")
-    for position in range(word_length):
-      letter = chosen_word[position]
-      if letter == guess:
-        display[position] = letter
-          
-    if guess not in chosen_word:
-      lives -= 1
-      print(f"Sorry the letter {guess} is not in the word.")
-      print("")
-      if lives == 0:
-        end_of_game = True
-        print("You lose!")
-        print(f"The word was {chosen_word}.")
-
-    print(f"{' '.join(display)}")
-
-    if "_" not in display:
-      end_of_game = True
-      print("You win.")
-
-    import hangman_art
-    print(hangman_art.stages[lives])
+while repeat == True:
+  num1 = int(input("What is the first number?:\n"))
+  op= input(''' *\n /\n +\n -\n Pick an operation \n''')
+  num2 = int(input("What is the second number?:\n"))
+  
+  if op == "+":
+    answer = add(num1,num2)
+    print(f"{num1} {op} {num2} = {answer} ")
+  elif op == "-":
+    answer = subtract(num1,num2)
+    print(f"{num1} {op} {num2} = {answer} ")
+  elif op == "*":
+    answer = multiply(num1,num2)
+    print(f"{num1} {op} {num2} = {answer} ")
+  elif op == "/":
+    answer = divide(num1,num2)
+    print(f"{num1} {op} {num2} = {answer} ")
+    
+  decide = (input(f"Type 'y' to continue calculating with {answer}, type 'n' to start a new calculation and 'x' to cancel.\n")).lower()
+  
+  if decide == 'y':
+    num1 = answer
+    op= input(''' *\n /\n +\n -\n Pick an operation \n''')
+    num2 = int(input("What is the second number?:\n"))
+    if op == "+":
+      answer = add(num1,num2)
+      print(f"{num1} {op} {num2} = {answer} ")
+    elif op == "-":
+      answer = subtract(num1,num2)
+      print(f"{num1} {op} {num2} = {answer} ")
+    elif op == "*":
+      answer = multiply(num1,num2)
+      print(f"{num1} {op} {num2} = {answer} ")
+    elif op == "/":
+      answer = divide(num1,num2)
+      print(f"{num1} {op} {num2} = {answer} ")
+    print("Thank you, Goodbye!")
+    break
+  elif decide == 'n':
+    repeat = True
+    clear()
+  else:
+    break
