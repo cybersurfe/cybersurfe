@@ -1,56 +1,33 @@
 from replit import clear
-import art
-print(art.logo)
-repeat = True
-def add(a,b):
-  return a + b
-def subtract(c, d):
-  return c-d
-def multiply(e, f):
-  return e * f
-def divide(h, i):
-  return h/i
 
-while repeat == True:
-  num1 = int(input("What is the first number?:\n"))
-  op= input(''' *\n /\n +\n -\n Pick an operation \n''')
-  num2 = int(input("What is the second number?:\n"))
+import art
+
+print(art.logo)
+
+print("Welcome to the secret auction program!")
+
+recycle = True
+
+auctioneers = {}
+
+def add_new_bidder(x,y):
+   auctioneers.update({x:y})
   
-  if op == "+":
-    answer = add(num1,num2)
-    print(f"{num1} {op} {num2} = {answer} ")
-  elif op == "-":
-    answer = subtract(num1,num2)
-    print(f"{num1} {op} {num2} = {answer} ")
-  elif op == "*":
-    answer = multiply(num1,num2)
-    print(f"{num1} {op} {num2} = {answer} ")
-  elif op == "/":
-    answer = divide(num1,num2)
-    print(f"{num1} {op} {num2} = {answer} ")
-    
-  decide = (input(f"Type 'y' to continue calculating with {answer}, type 'n' to start a new calculation and 'x' to cancel.\n")).lower()
+while recycle == True:
+  name = input("What is your name?:\n")
+  bid_price = int(input("What is your bid?:\n $"))
+  add_new_bidder(name, bid_price)
   
-  if decide == 'y':
-    num1 = answer
-    op= input(''' *\n /\n +\n -\n Pick an operation \n''')
-    num2 = int(input("What is the second number?:\n"))
-    if op == "+":
-      answer = add(num1,num2)
-      print(f"{num1} {op} {num2} = {answer} ")
-    elif op == "-":
-      answer = subtract(num1,num2)
-      print(f"{num1} {op} {num2} = {answer} ")
-    elif op == "*":
-      answer = multiply(num1,num2)
-      print(f"{num1} {op} {num2} = {answer} ")
-    elif op == "/":
-      answer = divide(num1,num2)
-      print(f"{num1} {op} {num2} = {answer} ")
-    print("Thank you, Goodbye!")
-    break
-  elif decide == 'n':
-    repeat = True
+  redo = input("Are there any other bidders. Type 'yes' or 'no'.")
+  
+  if redo == 'yes':
     clear()
+    recycle = True
   else:
-    break
+    max = 0
+    for x,y in auctioneers.items():
+      if y > max:
+        max = y
+        winner = x
+    print(f"The winner is {winner} with a bid of ${max}.")
+    recycle = False
